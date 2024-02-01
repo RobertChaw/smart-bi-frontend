@@ -1,101 +1,195 @@
-// @ts-ignore
-/* eslint-disable */
-
 declare namespace API {
-  type CurrentUser = {
-    name?: string;
-    avatar?: string;
-    userid?: string;
-    email?: string;
-    signature?: string;
-    title?: string;
-    group?: string;
-    tags?: { key?: string; label?: string }[];
-    notifyCount?: number;
-    unreadCount?: number;
-    country?: string;
-    access?: string;
-    geographic?: {
-      province?: { label?: string; key?: string };
-      city?: { label?: string; key?: string };
-    };
-    address?: string;
-    phone?: string;
+  type BaseResponseBoolean = {
+    code?: number;
+    data?: boolean;
+    message?: string;
   };
 
-  type LoginResult = {
+  type BaseResponseChart = {
+    code?: number;
+    data?: Chart;
+    message?: string;
+  };
+
+  type BaseResponseLong = {
+    code?: number;
+    data?: number;
+    message?: string;
+  };
+
+  type BaseResponsePageChart = {
+    code?: number;
+    data?: PageChart;
+    message?: string;
+  };
+
+  type BaseResponsePageUser = {
+    code?: number;
+    data?: PageUser;
+    message?: string;
+  };
+
+  type BaseResponseString = {
+    code?: number;
+    data?: string;
+    message?: string;
+  };
+
+  type BaseResponseUserVO = {
+    code?: number;
+    data?: UserVO;
+    message?: string;
+  };
+
+  type Chart = {
+    id?: number;
+    userId?: number;
+    goal?: string;
+    chartOption?: string;
     status?: string;
-    type?: string;
-    currentAuthority?: string;
+    reason?: string;
+    summary?: string;
+    createTime?: string;
+    updateTime?: string;
+    isDelete?: number;
   };
 
-  type PageParams = {
+  type ChartCreateRequest = {
+    goal?: string;
+  };
+
+  type ChartListRequest = {
     current?: number;
     pageSize?: number;
-  };
-
-  type RuleListItem = {
-    key?: number;
-    disabled?: boolean;
-    href?: string;
-    avatar?: string;
-    name?: string;
-    owner?: string;
-    desc?: string;
-    callNo?: number;
-    status?: number;
-    updatedAt?: string;
-    createdAt?: string;
-    progress?: number;
-  };
-
-  type RuleList = {
-    data?: RuleListItem[];
-    /** 列表的内容总数 */
-    total?: number;
-    success?: boolean;
-  };
-
-  type FakeCaptcha = {
-    code?: number;
+    sortField?: string;
+    sortOrder?: string;
+    id?: number;
+    goal?: string;
     status?: string;
+    reason?: string;
+    summary?: string;
+    createTime?: string;
+    updateTime?: string;
   };
 
-  type LoginParams = {
+  type createChartParams = {
+    chartCreateRequest: ChartCreateRequest;
+  };
+
+  type deleteChartByIdParams = {
+    id: number;
+  };
+
+  type deleteUserByIdParams = {
+    id: number;
+  };
+
+  type getAllChartsParams = {
+    chartListRequest: ChartListRequest;
+  };
+
+  type getAllUsersParams = {
+    userListRequest: UserListRequest;
+  };
+
+  type getChartByIdParams = {
+    id: number;
+  };
+
+  type handleFileUploadParams = {
+    type: string;
+  };
+
+  type OrderItem = {
+    column?: string;
+    asc?: boolean;
+  };
+
+  type PageChart = {
+    records?: Chart[];
+    total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: boolean;
+    searchCount?: boolean;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
+  };
+
+  type PageUser = {
+    records?: User[];
+    total?: number;
+    size?: number;
+    current?: number;
+    orders?: OrderItem[];
+    optimizeCountSql?: boolean;
+    searchCount?: boolean;
+    optimizeJoinOfCountSql?: boolean;
+    maxLimit?: number;
+    countId?: string;
+    pages?: number;
+  };
+
+  type updateChartParams = {
+    id: number;
+  };
+
+  type updateUserParams = {
+    id: number;
+  };
+
+  type User = {
+    id?: number;
     username?: string;
+    userAccount?: string;
     password?: string;
-    autoLogin?: boolean;
-    type?: string;
-  };
-
-  type ErrorResponse = {
-    /** 业务约定的错误码 */
-    errorCode: string;
-    /** 业务上的错误信息 */
-    errorMessage?: string;
-    /** 业务上的请求是否成功 */
-    success?: boolean;
-  };
-
-  type NoticeIconList = {
-    data?: NoticeIconItem[];
-    /** 列表的内容总数 */
-    total?: number;
-    success?: boolean;
-  };
-
-  type NoticeIconItemType = 'notification' | 'message' | 'event';
-
-  type NoticeIconItem = {
-    id?: string;
-    extra?: string;
-    key?: string;
-    read?: boolean;
     avatar?: string;
-    title?: string;
-    status?: string;
-    datetime?: string;
-    description?: string;
-    type?: NoticeIconItemType;
+    role?: string;
+    createTime?: string;
+    updateTime?: string;
+    isDelete?: boolean;
+  };
+
+  type UserListRequest = {
+    current?: number;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    id?: number;
+    username?: string;
+    userAccount?: string;
+    role?: string;
+  };
+
+  type UserLoginRequest = {
+    userAccount?: string;
+    password?: string;
+  };
+
+  type UserRegisterRequest = {
+    userAccount?: string;
+    password?: string;
+  };
+
+  type UserUpdateRequest = {
+    id?: number;
+    username?: string;
+    userAccount?: string;
+    password?: string;
+    avatar?: string;
+    role?: string;
+  };
+
+  type UserVO = {
+    id?: number;
+    username?: string;
+    userAccount?: string;
+    avatar?: string;
+    role?: string;
+    createTime?: string;
+    updateTime?: string;
   };
 }

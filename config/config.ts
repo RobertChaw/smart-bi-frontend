@@ -142,11 +142,11 @@ export default defineConfig({
       schemaPath: join(__dirname, 'oneapi.json'),
       mock: false,
     },
-    {
+    /*   {
       requestLibPath: "import { request } from '@umijs/max'",
       schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
       projectName: 'swagger',
-    },
+    },*/
   ],
   mfsu: {
     strategy: 'normal',
@@ -154,3 +154,4 @@ export default defineConfig({
   esbuildMinifyIIFE: true,
   requestRecord: {},
 });
+console.log('testing', join(__dirname, 'oneapi.json'));
