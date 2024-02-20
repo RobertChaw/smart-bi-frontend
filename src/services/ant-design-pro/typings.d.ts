@@ -55,7 +55,8 @@ declare namespace API {
   };
 
   type ChartCreateRequest = {
-    goal?: string;
+    goal: string;
+    file: string;
   };
 
   type ChartListRequest = {
@@ -72,8 +73,12 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type createChartParams = {
-    chartCreateRequest: ChartCreateRequest;
+  type ChartUpdateRequest = {
+    goal?: string;
+    chartOption?: string;
+    status?: string;
+    reason?: string;
+    summary?: string;
   };
 
   type deleteChartByIdParams = {
@@ -98,6 +103,7 @@ declare namespace API {
 
   type handleFileUploadParams = {
     type: string;
+    file: string;
   };
 
   type OrderItem = {
@@ -165,13 +171,14 @@ declare namespace API {
   };
 
   type UserLoginRequest = {
-    userAccount?: string;
-    password?: string;
+    userAccount: string;
+    password: string;
   };
 
   type UserRegisterRequest = {
-    userAccount?: string;
-    password?: string;
+    userAccount: string;
+    username: string;
+    password: string;
   };
 
   type UserUpdateRequest = {

@@ -45,7 +45,19 @@ export default [
       },
     ],
   },
-/*  {
+  {
+    path: '/createChart',
+    name: 'create-chart',
+    icon: 'smile',
+    component: './CreateChart',
+  },
+  {
+    path: '/chartList',
+    name: 'chart-list',
+    icon: 'smile',
+    component: './ChartList',
+  },
+  /*  {
     name: 'list.table-list',
     icon: 'table',
     path: '/list',

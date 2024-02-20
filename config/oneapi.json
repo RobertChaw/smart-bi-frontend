@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "http://127.0.0.1:8080",
+      "url": "http://localhost:8080",
       "description": "Generated server url"
     }
   ],
@@ -151,7 +151,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Chart"
+                "$ref": "#/components/schemas/ChartUpdateRequest"
               }
             }
           },
@@ -284,20 +284,23 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
           }
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "required": ["file"],
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
+                "type": "string",
+                "format": "binary"
               }
             }
           }
@@ -346,31 +349,15 @@
       "post": {
         "tags": ["Chart"],
         "operationId": "createChart",
-        "parameters": [
-          {
-            "name": "chartCreateRequest",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ChartCreateRequest"
-            }
-          }
-        ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "required": ["file"],
-                "type": "object",
-                "properties": {
-                  "file": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
+                "$ref": "#/components/schemas/ChartCreateRequest"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -475,17 +462,9 @@
           }
         }
       },
-      "Chart": {
+      "ChartUpdateRequest": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "userId": {
-            "type": "integer",
-            "format": "int64"
-          },
           "goal": {
             "type": "string"
           },
@@ -500,25 +479,17 @@
           },
           "summary": {
             "type": "string"
-          },
-          "createTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isDelete": {
-            "type": "integer",
-            "format": "int32"
           }
         }
       },
       "UserRegisterRequest": {
+        "required": ["password", "userAccount", "username"],
         "type": "object",
         "properties": {
           "userAccount": {
+            "type": "string"
+          },
+          "username": {
             "type": "string"
           },
           "password": {
@@ -542,6 +513,7 @@
         }
       },
       "UserLoginRequest": {
+        "required": ["password", "userAccount"],
         "type": "object",
         "properties": {
           "userAccount": {
@@ -612,10 +584,17 @@
         }
       },
       "ChartCreateRequest": {
+        "required": ["file", "goal"],
         "type": "object",
         "properties": {
           "goal": {
-            "type": "string"
+            "type": "string",
+            "refType": null
+          },
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "refType": null
           }
         }
       },
@@ -820,6 +799,46 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "Chart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "userId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "goal": {
+            "type": "string"
+          },
+          "chartOption": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "createTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDelete": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
